@@ -1,0 +1,3 @@
+# Contrastive Learning for Sentence Embeddings
+
+Sentence embeddings can be trained with a contrastive loss that pulls representations of similar sentences together and pushes dissimilar ones apart. SimCSE is a well-known method in this family. The temperature parameter in the InfoNCE loss controls how sharp the distribution is.

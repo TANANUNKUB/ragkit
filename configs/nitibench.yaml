@@ -1,0 +1,16 @@
+extends: base.yaml
+dataset:
+  adapter: nitibench
+  path: data/nitibench
+  split: test
+chunker:
+  name: structure           # prefer one law section ≈ one chunk once the adapter lands
+retriever:
+  aggregate: doc            # test set: a single positive section per question
+  bm25:
+    tokenizer: pythainlp    # or thai_char_ngram if you don't want the extra
+eval:
+  level: doc
+# Notes:
+# - Corpus and questions are Thai; whitespace BM25 is a weak baseline.
+# - Report on the official test split (lawyer-authored), not the synthetic train set.

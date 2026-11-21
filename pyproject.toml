@@ -1,0 +1,55 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ragkit"
+version = "0.1.0"
+description = "Dataset-agnostic, pluggable RAG framework"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+authors = [{ name = "Kungfu" }]
+keywords = ["rag", "retrieval", "rerank", "evaluation"]
+dependencies = [
+  "pydantic>=2",
+  "pyyaml>=6",
+  "numpy>=1.26",
+  "bm25s>=0.2",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "httpx"]
+api = ["fastapi>=0.110", "uvicorn>=0.27"]
+dense = ["sentence-transformers"]
+qdrant = ["qdrant-client"]
+pdf = ["pymupdf"]
+obs = ["langfuse"]
+eval = ["ragas"]
+thai = ["pythainlp"]
+llm = ["transformers", "torch"]
+all = [
+  "pytest>=8",
+  "httpx",
+  "fastapi>=0.110",
+  "uvicorn>=0.27",
+  "sentence-transformers",
+  "qdrant-client",
+  "pymupdf",
+  "langfuse",
+  "pythainlp",
+]
+
+[project.scripts]
+ragkit = "ragkit.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/kungfu/ragkit"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+pythonpath = ["src"]

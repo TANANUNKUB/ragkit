@@ -1,0 +1,36 @@
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+dist/
+build/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+*.so
+
+# Tooling / OS
+.idea/
+.vscode/
+.DS_Store
+*.swp
+
+# Runtime artifacts (keep directory placeholders)
+results/*
+!results/.gitkeep
+data/*
+!data/.gitkeep
+*.embed_cache
+.cache/
+.embeddings_cache/
+
+# Local env
+.env
+.env.*
+!.env.example

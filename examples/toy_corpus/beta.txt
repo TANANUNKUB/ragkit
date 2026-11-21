@@ -1,0 +1,3 @@
+# BM25 Ranking Function
+
+BM25 is a sparse lexical ranking function used in information retrieval. It scores a document by a term-frequency component with a saturation effect and an inverse document frequency component. Unlike dense embeddings, BM25 does not capture synonyms unless they share tokens.

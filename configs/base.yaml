@@ -1,0 +1,61 @@
+# Default pipeline. Dataset-agnostic. Override per corpus in sibling YAML files
+# with `extends: base.yaml` — only put the keys you want to change there.
+dataset:
+  adapter: folder
+  path: examples/toy_corpus
+  tenant_id: public
+  roles: ["*"]
+
+parser:
+  name: text
+
+chunker:
+  name: structure
+  max_tokens: 600
+  overlap: 80
+
+retriever:
+  name: hybrid
+  top_k: 100
+  rrf_k: 60
+  aggregate: chunk   # chunk | doc  (use doc / paper when gold labels are document-level)
+  bm25:
+    tokenizer: whitespace   # whitespace | thai_char_ngram | pythainlp
+  dense:
+    embedder: hash          # hash (offline) | sentence_transformers
+    store: memory           # memory | qdrant
+    model: BAAI/bge-m3
+    dim: 64
+    qdrant:
+      url: http://localhost:6333
+      collection: ragkit
+
+reranker:
+  name: none                # none | cross_encoder | qwen
+  top_k: 50
+  model: BAAI/bge-reranker-v2-m3
+  instruction: "Given a question, retrieve the document that answers it"
+
+generator:
+  name: fake                # fake | openai_compat
+  base_url: http://localhost:11434/v1
+  model: qwen2.5
+  temperature: 0.0
+  top_k: 5
+  abstain_threshold: null   # e.g. 0.3 when using a probabilistic reranker; null disables
+
+security:
+  max_query_length: 2000
+  enable_injection_guard: true
+  reject_injection: true
+  default_filters: {}
+
+observability:
+  tracer: noop              # noop | langfuse
+  langfuse:
+    host: http://localhost:3000
+
+eval:
+  k_values: [5, 20, 100]
+  ndcg_k: 10
+  level: doc

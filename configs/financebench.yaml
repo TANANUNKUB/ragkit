@@ -1,0 +1,19 @@
+extends: base.yaml
+dataset:
+  adapter: financebench
+  path: data/financebench
+  pdf_dir: data/financebench/pdfs
+parser:
+  name: pdf                 # swap to docling when you implement the hook
+chunker:
+  name: structure
+  max_tokens: 700
+  overlap: 80
+retriever:
+  aggregate: doc            # gold is doc_name; also stash evidence_page_num for page-level scoring
+eval:
+  level: doc
+# Notes:
+# - Preserve page numbers in Chunk.metadata.page.
+# - Keep markdown tables intact; repeat header rows if a table must be split.
+# - Check the FinanceBench license before publishing portfolio numbers.

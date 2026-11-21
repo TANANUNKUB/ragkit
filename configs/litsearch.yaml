@@ -1,0 +1,14 @@
+extends: base.yaml
+dataset:
+  adapter: litsearch
+  path: data/litsearch
+  include_full_text: true
+retriever:
+  aggregate: doc            # gold labels are paper-level corpusids
+  # bm25 / dense stay as in base until you swap in bge-m3 + Qdrant
+eval:
+  level: doc
+# Notes (optimize later, don't bake into the core):
+# - Compare title+abstract vs section chunks as an ablation row.
+# - After chunk-level retrieval, max-aggregate to corpusid before Recall@k / nDCG.
+# - Filter by year / venue in security.default_filters or per-query filters.

@@ -1,0 +1,3 @@
+{"id": "q1", "query": "papers that use contrastive learning for sentence embeddings", "gold_doc_ids": ["alpha"], "gold_answer": "SimCSE-style contrastive training."}
+{"id": "q2", "query": "How does BM25 score a document?", "gold_doc_ids": ["beta"]}
+{"id": "q3", "query": "การกรองสิทธิ์เข้าถึงเอกสารทำอย่างไร", "gold_doc_ids": ["gamma"]}
